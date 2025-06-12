@@ -1,0 +1,31 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_9_64)">
+<rect width="1080" height="1080" rx="100" fill="#0F0F0F"/>
+<g opacity="0.05">
+<rect x="746.472" y="1036" width="203.476" height="162.358" fill="#A3A3A3" fill-opacity="0.5"/>
+<rect x="-74.9326" y="378.445" width="204.052" height="160.491" fill="#A3A3A3" fill-opacity="0.15"/>
+<line x1="-1306.1" y1="705.141" x2="2387" y2="705.141" stroke="white" stroke-width="1.2607"/>
+<line x1="-1306.1" y1="45.272" x2="2387" y2="45.272" stroke="white" stroke-width="1.2607"/>
+<line x1="-1306.1" y1="375.204" x2="2387" y2="375.204" stroke="white" stroke-width="1.2607"/>
+<line x1="-1306.1" y1="1035.07" x2="2387" y2="1035.07" stroke="white" stroke-width="1.2607"/>
+<line x1="-1306.1" y1="540.172" x2="2387" y2="540.172" stroke="white" stroke-width="1.2607"/>
+<line x1="-1306.1" y1="210.237" x2="2387" y2="210.237" stroke="white" stroke-width="1.2607"/>
+<line x1="-1306.1" y1="870.108" x2="2387" y2="870.108" stroke="white" stroke-width="1.2607"/>
+<line y1="-0.630349" x2="2309.97" y2="-0.630349" transform="matrix(0.000138654 1 -1 8.82781e-05 334.433 -613.971)" stroke="white" stroke-width="1.2607"/>
+<line y1="-0.630349" x2="2312" y2="-0.630349" transform="matrix(0.000540599 1 -1 0.000344189 743.929 -616)" stroke="white" stroke-width="1.2607"/>
+<line y1="-0.630349" x2="2309.97" y2="-0.630349" transform="matrix(0.000890269 1 -1 0.000566816 537.909 -613.971)" stroke="white" stroke-width="1.2607"/>
+<line y1="-0.630349" x2="2309.97" y2="-0.630349" transform="matrix(0.000196719 1 -1 0.000125247 949.949 -613.971)" stroke="white" stroke-width="1.2607"/>
+<line y1="-0.630349" x2="2309.97" y2="-0.630349" transform="matrix(-0.000618337 1 -1 -0.000393683 130.957 -613.971)" stroke="white" stroke-width="1.2607"/>
+</g>
+<path d="M536 906C330 906 205 756 205 536C205 322 332 164 548 164C737 164 834 260 867 418L687 426C673 351 633 306 549 306C440 306 384 402 384 536C384 671 436 764 553 764C636 764 688 714 696 638H549V517H869V890H765L759 795C722 863 638 906 536 906Z" fill="url(#paint0_linear_9_64)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_9_64" x1="167" y1="194.672" x2="913.231" y2="885.078" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#BFBFBF"/>
+</linearGradient>
+<clipPath id="clip0_9_64">
+<rect width="1080" height="1080" rx="100" fill="white"/>
+</clipPath>
+</defs>
+</svg>
