@@ -122,8 +122,7 @@ export function ChatInput() {
             </h1>
 
             <div className="w-full">
-                <div className="relative bg-secondary rounded-xl border border-border">
-                    {/* Previews dos arquivos anexados */}
+                <div className="relative bg-muted rounded-xl border border-border">
                     {files.length > 0 && (
                         <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background/70 overflow-x-auto">
                             {files.map((file, idx) => (

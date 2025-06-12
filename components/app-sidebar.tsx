@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import {
-  Command,
   FolderOpenIcon,
   Frame,
   Map,
@@ -24,7 +23,7 @@ import {
 import { Separator } from "./ui/separator"
 import { Button } from "./ui/button"
 import Image from "next/image"
-
+import { useTheme } from "next-themes";
 
 const data = {
   user: {
@@ -52,6 +51,8 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+  const { resolvedTheme } = useTheme();
   return (
     <Sidebar variant="floating" {...props} >
       <SidebarHeader>
@@ -60,7 +61,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild className="flex items-center">
               <a href="#">
                 <div className=" flex aspect-square size-6 items-center justify-center rounded-lg">
-                  <Image alt="logo" src='/logo.svg' width={1080} height={1080} />
+                  <Image alt="Github" width={20} height={20} src={resolvedTheme === "light" ? "/logo-black.svg" : "/logo.svg"} />
                 </div>
                 <Separator
                   orientation="vertical"
@@ -72,10 +73,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <div className="space-y-2 flex flex-col">
-        <Button variant='outline' className="">
+        <Button variant='outline' className="mx-2 py-2">
           Novo Chat
         </Button>
-        <Separator />
         <Button variant='ghost' className="flex justify-start gap-2 items-center">
           <SearchIcon />
           Pesquisa
