@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import { useState } from "react";
+import { useTheme } from "next-themes";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import {
@@ -63,13 +64,14 @@ function useAutoResizeTextarea({
 }
 
 export function ChatInput() {
+    const { resolvedTheme } = useTheme();
     const [value, setValue] = useState("");
     const { textareaRef, adjustHeight } = useAutoResizeTextarea({
         minHeight: 60,
         maxHeight: 200,
     });
-    const [file, setFile] = useState<File | null>(null);
-    const [preview, setPreview] = useState<string | null>(null);
+    const [files, setFiles] = useState<File[]>([]);
+    const [previews, setPreviews] = useState<(string | null)[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -83,25 +85,35 @@ export function ChatInput() {
     };
 
     useEffect(() => {
-        if (file && file.type.startsWith("image")) {
-            const reader = new FileReader();
-            reader.onload = (e) => setPreview(e.target?.result as string);
-            reader.readAsDataURL(file);
-        } else {
-            setPreview(null);
-        }
-    }, [file]);
+        // Gera previews para todos os arquivos
+        const ps: Promise<string | null>[] = files.map((file) => {
+            if (file.type.startsWith("image")) {
+                const reader = new FileReader();
+                return new Promise<string | null>((resolve) => {
+                    reader.onload = (e) => resolve(e.target?.result as string);
+                    reader.readAsDataURL(file);
+                });
+            }
+            return Promise.resolve(null);
+        });
+        Promise.all(ps).then(setPreviews);
+    }, [files]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const f = e.target.files?.[0];
-        if (f) setFile(f);
+        const selected = Array.from(e.target.files ?? []);
+        // Evitar arquivos duplicados pelo nome + tamanho
+        const unique = selected.filter(
+            (f) => !files.some((file) => file.name === f.name && file.size === f.size)
+        );
+        setFiles((prev) => [...prev, ...unique]);
     };
 
-    const removeFile = () => {
-        setFile(null);
-        setPreview(null);
-        if (fileInputRef.current) fileInputRef.current.value = "";
+    const removeFile = (idx: number) => {
+        setFiles((prev) => prev.filter((_, i) => i !== idx));
+        setPreviews((prev) => prev.filter((_, i) => i !== idx));
+        if (fileInputRef.current && files.length === 1) fileInputRef.current.value = "";
     };
+
 
     return (
         <div className="flex flex-col items-center w-full justify-center max-w-4xl mx-auto space-y-4">
@@ -111,34 +123,41 @@ export function ChatInput() {
 
             <div className="w-full">
                 <div className="relative bg-secondary rounded-xl border border-border">
-                    {/* Preview do arquivo anexado */}
-                    {file && (
-                        <div className="flex items-center gap-3 p-4 border-b border-border bg-background/70">
-                            {preview ? (
-                                <Image
-                                    src={preview}
-                                    alt={file.name}
-                                    width={40}
-                                    height={40}
-                                    className="rounded-md object-cover w-10 h-10"
-                                />
-                            ) : (
-                                <div className="w-10 h-10 flex items-center justify-center rounded-md bg-muted text-muted-foreground">
-                                    <Paperclip className="w-5 h-5" />
+                    {/* Previews dos arquivos anexados */}
+                    {files.length > 0 && (
+                        <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background/70 overflow-x-auto">
+                            {files.map((file, idx) => (
+                                <div
+                                    key={file.name + file.size + idx}
+                                    className="flex items-center gap-2 px-2 py-1 rounded-lg border border-border bg-secondary min-w-[160px] max-w-[220px]"
+                                >
+                                    {previews[idx] ? (
+                                        <Image
+                                            src={previews[idx] as string}
+                                            alt={file.name}
+                                            width={32}
+                                            height={32}
+                                            className="rounded-md object-cover w-8 h-8"
+                                        />
+                                    ) : (
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-md bg-muted text-muted-foreground">
+                                            <Paperclip className="w-4 h-4" />
+                                        </div>
+                                    )}
+                                    <div className="flex-1 min-w-0">
+                                        <div className="truncate font-medium text-foreground text-xs">{file.name}</div>
+                                        <div className="text-[10px] text-muted-foreground">{(file.size / 1024).toFixed(1)} kB</div>
+                                    </div>
+                                    <button
+                                        onClick={() => removeFile(idx)}
+                                        className="ml-1 text-muted-foreground hover:text-foreground rounded-full p-1 transition-colors"
+                                        title="Remover"
+                                        type="button"
+                                    >
+                                        ×
+                                    </button>
                                 </div>
-                            )}
-                            <div className="flex-1 min-w-0">
-                                <div className="truncate font-medium text-foreground text-sm">{file.name}</div>
-                                <div className="text-xs text-muted-foreground">{(file.size / 1024).toFixed(1)} kB</div>
-                            </div>
-                            <button
-                                onClick={removeFile}
-                                className="ml-2 text-muted-foreground hover:text-foreground rounded-full p-1 transition-colors"
-                                title="Remover"
-                                type="button"
-                            >
-                                ×
-                            </button>
+                            ))}
                         </div>
                     )}
                     <div className="overflow-y-auto">
@@ -150,7 +169,7 @@ export function ChatInput() {
                                 adjustHeight();
                             }}
                             onKeyDown={handleKeyDown}
-                            placeholder="Ask a question..."
+                            placeholder="Um SaaS web que conecte..."
                             className={cn(
                                 "w-full px-4 py-3",
                                 "resize-none",
@@ -213,12 +232,16 @@ export function ChatInput() {
 
                 <div className="flex items-center justify-center gap-3 mt-4">
                     <ActionButton
-                        icon={<Image alt="Github" width={16} height={16} src='/figma.svg' className="w-4 h-4" />}
-                        label="Import from Figma"
+                        icon={<Image alt="Figma" width={16} height={16} src='/figma.svg' className="w-4 h-4" />}
+                        label="Importe do Figma"
                     />
                     <ActionButton
-                        icon={<Image alt="Github" width={16} height={16} src='/github.svg' className="w-4 h-4" />}
-                        label="Upload a Project"
+                        icon={<Image alt="Github" width={16} height={16} src={resolvedTheme === "light" ? "/github.svg" : "/github-white.svg"} className="w-4 h-4" />}
+                        label="Upload do Github"
+                    />
+                    <ActionButton
+                        icon={<Image alt="Supabase" width={16} height={16} src="/supabase.svg" className="w-4 h-4" />}
+                        label="Integrar e Construir"
                     />
                 </div>
             </div>

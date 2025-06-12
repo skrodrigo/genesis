@@ -1,36 +1,35 @@
+'use client'
+
 import { AppSidebar } from "@/components/app-sidebar"
+import { ChatInput } from "@/components/chat-input"
+import { ThemeSwitcher } from "@/components/theme-switcher"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { SettingsDialog } from "@/components/settings-dialog"
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuGroup,
-  DropdownMenuShortcut
+  DropdownMenuShortcut,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import {
-  Settings,
-  DollarSign,
-  BookOpen,
-  Users,
-  LogOut,
-  Palette,
-  Globe,
-  ChevronDown,
-  CircleDollarSignIcon
-} from "lucide-react"
-import { ChatInput } from "@/components/chat-input"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { Button } from "@/components/ui/button"
-import { ThemeSwitcher } from "@/components/theme-switcher"
+import {
+  CircleDollarSignIcon,
+  LogOut,
+  Settings
+} from "lucide-react"
+
+import { useState } from "react";
 
 export default function Page() {
+  const [settingsOpen, setSettingsOpen] = useState(false);
   return (
     <SidebarProvider >
       <AppSidebar />
@@ -54,7 +53,7 @@ export default function Page() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setSettingsOpen(true)}>
                       <Settings className="w-4 h-4 mr-2" />
                       Settings
                     </DropdownMenuItem>
@@ -86,11 +85,12 @@ export default function Page() {
             </div>
           </header>
 
-          <div className="flex flex-1 flex-col w-full items-center justify-center h-[calc(100vh-12rem)]">
+          <div className="flex flex-1 flex-col w-full items-center justify-center px-4 h-[calc(100vh-12rem)]">
             <ChatInput />
           </div>
         </div>
       </SidebarInset>
+      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </SidebarProvider>
   )
 }
