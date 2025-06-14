@@ -29,7 +29,7 @@ export default function DashboardLayout({
             <ProfileMenu onSettings={() => setSettingsOpen(true)} />
           </div>
         </header>
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 ">{children}</div>
       </SidebarInset>
       <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </SidebarProvider>

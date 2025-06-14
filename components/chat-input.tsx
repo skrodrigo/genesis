@@ -115,9 +115,9 @@ export function ChatInput() {
         <div className="flex flex-col items-center w-full justify-center max-w-4xl mx-auto space-y-4">
 
             <div className="w-full">
-                <div className="relative bg-muted rounded-xl border border-border">
+                <div className="relative bg-muted rounded-lg border border-border">
                     {files.length > 0 && (
-                        <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background/70 overflow-x-auto">
+                        <div className="flex items-center rounded-lg gap-2 px-4 py-3 border-b border-border bg-background/70 overflow-x-auto">
                             {files.map((file, idx) => (
                                 <div
                                     key={file.name + file.size + idx}
