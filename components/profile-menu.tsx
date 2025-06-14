@@ -10,7 +10,7 @@ export function ProfileMenu({ onSettings }: { onSettings?: () => void }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar>
+        <Avatar className="cursor-pointer">
           <AvatarImage alt="User" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
@@ -39,7 +39,7 @@ export function ProfileMenu({ onSettings }: { onSettings?: () => void }) {
           <ThemeSwitcher />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem >
+        <DropdownMenuItem className="cursor-pointer">
           <LogOut className="w-4 h-4 mr-2" />
           Sign Out
         </DropdownMenuItem>

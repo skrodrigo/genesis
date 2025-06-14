@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ProfileMenu } from "@/components/profile-menu";
+import { SettingsDialog } from "./settings/settings-dialog";
 import {
   SidebarProvider,
   SidebarTrigger,
@@ -13,6 +15,8 @@ export default function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -22,11 +26,12 @@ export default function DashboardLayout({
             <SidebarTrigger className="-ml-1" />
           </div>
           <div className="ml-auto flex items-center px-4">
-            <ProfileMenu />
+            <ProfileMenu onSettings={() => setSettingsOpen(true)} />
           </div>
         </header>
         <div className="flex-1">{children}</div>
       </SidebarInset>
+      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </SidebarProvider>
   );
 }
