@@ -10,29 +10,45 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image from "next/image"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const { resolvedTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back</CardTitle>
           <CardDescription>
-            Login with your Apple or Google account
+            Login with your Github or Google account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
-                <Button variant="outline" className="w-full">
-                  <Image alt="Google" width={18} height={18} src='/github.svg' />
+                <Button variant="default" className="w-full">
+                  {isMounted && (
+                    <Image
+                      alt="Logo"
+                      width={20}
+                      height={20}
+                      src={resolvedTheme === "dark" ? "/github.svg" : "/github-white.svg"}
+                    />
+                  )}
                   Login with Github
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button variant="default" className="w-full">
                   <Image alt="Google" width={18} height={18} src='/google.svg' />
                   Login with Google
                 </Button>

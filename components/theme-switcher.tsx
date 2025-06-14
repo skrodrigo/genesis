@@ -35,7 +35,7 @@ export function ThemeSwitcher() {
             key={option.value}
             aria-label={option.label}
             className={cn(
-              "flex items-center justify-center w-8 h-4 rounded-full transition-colors",
+              "flex items-center hover:cursor-pointer justify-center w-8 h-4 rounded-full transition-colors",
               active ? "bg-muted text-primary" : "hover:bg-muted/50 text-muted-foreground"
             )}
             onClick={() => setTheme(option.value)}

@@ -1,96 +1,57 @@
 'use client'
 
-import { AppSidebar } from "@/components/app-sidebar"
 import { ChatInput } from "@/components/chat-input"
-import { ThemeSwitcher } from "@/components/theme-switcher"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { SettingsDialog } from "@/components/settings-dialog"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-import {
-  CircleDollarSignIcon,
-  LogOut,
-  Settings
-} from "lucide-react"
+import { useEffect, useState } from "react";
+import Image from "next/image"
+import { useTheme } from "next-themes"
 
-import { useState } from "react";
+interface ActionButtonProps {
+  icon: React.ReactNode;
+  label: string;
+}
+
+function ActionButton({ icon, label }: ActionButtonProps) {
+  return (
+    <button
+      type="button"
+      className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full border border-border text-muted hover:text-secondary transition-colors"
+    >
+      {icon}
+      <span className="text-xs text-foreground">{label}</span>
+    </button>
+  );
+}
 
 export default function Page() {
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  return (
-    <SidebarProvider >
-      <AppSidebar />
-      <SidebarInset>
-        <div>
-          <header className="flex h-16 shrink-0 items-center gap-2">
-            <div className="flex items-center gap-2 px-4">
-              <SidebarTrigger className="-ml-1" />
-            </div>
-            <div className="ml-auto flex items-center px-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Avatar>
-                    <AvatarImage alt="User" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-64">
-                  <DropdownMenuLabel className="flex flex-col items-start gap-1">
-                    <span className="text-xs text-muted-foreground">rodrigoa0987@gmail.com</span>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={() => setSettingsOpen(true)}>
-                      <Settings className="w-4 h-4 mr-2" />
-                      Settings
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <CircleDollarSignIcon className="w-4 h-4 mr-2" />
-                      Pricing
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuLabel className="flex flex-col items-start">
-                    Credit Balance
-                  </DropdownMenuLabel>
-                  <DropdownMenuItem className="cursor-pointer">
-                    Monthly credits <DropdownMenuShortcut>4.48</DropdownMenuShortcut>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuLabel>Preferences</DropdownMenuLabel>
-                  <DropdownMenuItem className="flex items-center justify-between">
-                    Theme
-                    <ThemeSwitcher />
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </header>
+  const { resolvedTheme } = useTheme();
+  const [, setIsMounted] = useState(false);
+  useEffect(() => { setIsMounted(true); }, [])
 
-          <div className="flex flex-1 flex-col w-full items-center justify-center px-4 h-[calc(100vh-12rem)]">
-            <ChatInput />
-          </div>
+  return (
+    <div>
+      <div className="flex flex-1 space-y-6 flex-col w-full items-center justify-center px-4 h-[calc(100vh-12rem)]">
+
+        <h1 className="text-4xl font-bold text-foreground">
+          O que você quer construir hoje?
+        </h1>
+
+        <ChatInput />
+
+        <div className="flex items-center justify-center gap-3 mt-4">
+          <ActionButton
+            icon={<Image alt="Figma" width={16} height={16} src='/figma.svg' className="w-4 h-4" />}
+            label="Importe do Figma"
+          />
+          <ActionButton
+            icon={<Image alt="Github" width={16} height={16} src={resolvedTheme === "light" ? "/github.svg" : "/github-white.svg"} className="w-4 h-4" />}
+            label="Upload do Github"
+          />
+          <ActionButton
+            icon={<Image alt="Supabase" width={16} height={16} src="/supabase.svg" className="w-4 h-4" />}
+            label="Integrar e Construir"
+          />
         </div>
-      </SidebarInset>
-      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
-    </SidebarProvider>
+      </div>
+    </div>
   )
 }

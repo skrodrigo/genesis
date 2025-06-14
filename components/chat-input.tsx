@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import { useState } from "react";
-import { useTheme } from "next-themes";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import {
@@ -64,7 +63,6 @@ function useAutoResizeTextarea({
 }
 
 export function ChatInput() {
-    const { resolvedTheme } = useTheme();
     const [value, setValue] = useState("");
     const { textareaRef, adjustHeight } = useAutoResizeTextarea({
         minHeight: 60,
@@ -85,7 +83,6 @@ export function ChatInput() {
     };
 
     useEffect(() => {
-        // Gera previews para todos os arquivos
         const ps: Promise<string | null>[] = files.map((file) => {
             if (file.type.startsWith("image")) {
                 const reader = new FileReader();
@@ -101,7 +98,6 @@ export function ChatInput() {
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selected = Array.from(e.target.files ?? []);
-        // Evitar arquivos duplicados pelo nome + tamanho
         const unique = selected.filter(
             (f) => !files.some((file) => file.name === f.name && file.size === f.size)
         );
@@ -117,9 +113,6 @@ export function ChatInput() {
 
     return (
         <div className="flex flex-col items-center w-full justify-center max-w-4xl mx-auto space-y-4">
-            <h1 className="text-4xl font-bold text-foreground">
-                O que você quer construir hoje?
-            </h1>
 
             <div className="w-full">
                 <div className="relative bg-muted rounded-xl border border-border">
@@ -136,10 +129,10 @@ export function ChatInput() {
                                             alt={file.name}
                                             width={32}
                                             height={32}
-                                            className="rounded-md object-cover w-8 h-8"
+                                            className="rounded-lg object-cover w-8 h-8"
                                         />
                                     ) : (
-                                        <div className="w-8 h-8 flex items-center justify-center rounded-md bg-muted text-muted-foreground">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-muted text-muted-foreground">
                                             <Paperclip className="w-4 h-4" />
                                         </div>
                                     )}
@@ -228,41 +221,11 @@ export function ChatInput() {
                         </div>
                     </div>
                 </div>
-
-                <div className="flex items-center justify-center gap-3 mt-4">
-                    <ActionButton
-                        icon={<Image alt="Figma" width={16} height={16} src='/figma.svg' className="w-4 h-4" />}
-                        label="Importe do Figma"
-                    />
-                    <ActionButton
-                        icon={<Image alt="Github" width={16} height={16} src={resolvedTheme === "light" ? "/github.svg" : "/github-white.svg"} className="w-4 h-4" />}
-                        label="Upload do Github"
-                    />
-                    <ActionButton
-                        icon={<Image alt="Supabase" width={16} height={16} src="/supabase.svg" className="w-4 h-4" />}
-                        label="Integrar e Construir"
-                    />
-                </div>
             </div>
         </div>
     );
 }
 
-interface ActionButtonProps {
-    icon: React.ReactNode;
-    label: string;
-}
 
-function ActionButton({ icon, label }: ActionButtonProps) {
-    return (
-        <button
-            type="button"
-            className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full border border-border text-muted hover:text-secondary transition-colors"
-        >
-            {icon}
-            <span className="text-xs text-foreground">{label}</span>
-        </button>
-    );
-}
 
 
