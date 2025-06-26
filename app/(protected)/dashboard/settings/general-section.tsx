@@ -30,7 +30,7 @@ export function GeneralSection() {
         <span className="font-semibold text-lg">Your Avatar</span>
         <span className="text-muted-foreground text-sm">Your avatar is automatically generated based on your account.</span>
         <div className="flex items-center mt-4 mb-2">
-          <div className="rounded-full w-12 h-12 bg-foreground flex items-center justify-center text-secondary text-xl">
+          <div className="rounded-full w-12 h-12 bg-accent flex items-center justify-center text-accent-foreground text-xl">
             {avatarInitial}
           </div>
         </div>
@@ -48,7 +48,7 @@ export function GeneralSection() {
           href={`https://genesis.dev/@${username}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-primary underline text-sm mt-1 flex items-center gap-1"
+          className="text-foreground underline text-sm mt-1 flex items-center gap-1"
         >
           genesis.dev/@{username}
           <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>

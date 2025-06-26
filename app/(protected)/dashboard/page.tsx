@@ -14,7 +14,7 @@ function ActionButton({ icon, label }: ActionButtonProps) {
   return (
     <button
       type="button"
-      className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full border border-border text-muted hover:text-secondary transition-colors"
+      className="flex items-center gap-2 px-4 py-2 bg-card rounded-full border border-border text-muted hover:text-secondary transition-colors"
     >
       {icon}
       <span className="text-xs text-foreground">{label}</span>
@@ -24,8 +24,12 @@ function ActionButton({ icon, label }: ActionButtonProps) {
 
 export default function Page() {
   const { resolvedTheme } = useTheme();
-  const [, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, [])
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div>

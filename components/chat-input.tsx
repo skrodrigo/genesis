@@ -115,13 +115,13 @@ export function ChatInput() {
         <div className="flex flex-col items-center w-full justify-center max-w-4xl mx-auto space-y-4">
 
             <div className="w-full">
-                <div className="relative bg-muted rounded-lg border border-border">
+                <div className="relative bg-card rounded-xl border border-border">
                     {files.length > 0 && (
-                        <div className="flex items-center rounded-lg gap-2 px-4 py-3 border-b border-border bg-background/70 overflow-x-auto">
+                        <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background overflow-x-auto">
                             {files.map((file, idx) => (
                                 <div
                                     key={file.name + file.size + idx}
-                                    className="flex items-center gap-2 px-2 py-1 rounded-lg border border-border bg-secondary min-w-[160px] max-w-[220px]"
+                                    className="flex items-center gap-2 px-2 py-1 rounded-sm border border-border bg-accent min-w-[160px] max-w-[220px]"
                                 >
                                     {previews[idx] ? (
                                         <Image
@@ -129,10 +129,10 @@ export function ChatInput() {
                                             alt={file.name}
                                             width={32}
                                             height={32}
-                                            className="rounded-lg object-cover w-8 h-8"
+                                            className="rounded-sm object-cover w-8 h-8"
                                         />
                                     ) : (
-                                        <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-xl bg-muted text-muted-foreground">
                                             <Paperclip className="w-4 h-4" />
                                         </div>
                                     )}
@@ -142,7 +142,7 @@ export function ChatInput() {
                                     </div>
                                     <button
                                         onClick={() => removeFile(idx)}
-                                        className="ml-1 text-muted-foreground hover:text-foreground rounded-full p-1 transition-colors"
+                                        className="ml-1 cursor-pointer   text-muted-foreground hover:text-foreground rounded-full p-1 transition-colors"
                                         title="Remover"
                                         type="button"
                                     >
@@ -170,7 +170,7 @@ export function ChatInput() {
                                 "text-foreground text-sm",
                                 "focus:outline-none",
                                 "focus-visible:ring-0 focus-visible:ring-offset-0",
-                                "placeholder:text-foreground placeholder:text-sm",
+                                "placeholder:text-foreground/70 placeholder:text-sm",
                                 "min-h-[60px]"
                             )}
                             style={{
@@ -189,7 +189,7 @@ export function ChatInput() {
                             />
                             <button
                                 type="button"
-                                className="group p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900 rounded-lg transition-colors flex items-center gap-1"
+                                className="group p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900 rounded-xl transition-colors flex items-center gap-1"
                                 onClick={() => fileInputRef.current?.click()}
                             >
                                 <Paperclip className="w-4 h-4 text-foreground" />
@@ -199,25 +199,25 @@ export function ChatInput() {
                             </button>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button
-                                type="button"
-                                className={cn(
-                                    "px-1.5 py-1.5 rounded-lg text-sm transition-colors border border-border flex items-center justify-between gap-1",
-                                    value.trim()
-                                        ? "bg-foreground text-secondary"
-                                        : "text-muted"
-                                )}
-                            >
-                                <ArrowUpIcon
+                            <a href="/dashboard/chat" >
+                                <button
                                     className={cn(
-                                        "w-5 h-5 cursor-pointer",
+                                        "px-1.5 py-1.5 rounded-xl text-sm transition-colors border border-border flex items-center justify-between gap-1",
                                         value.trim()
-                                            ? "text-muted"
-                                            : "text-foreground/20"
+                                            ? "bg-foreground text-secondary"
+                                            : "text-muted"
                                     )}
-                                />
-                                <span className="sr-only">Send</span>
-                            </button>
+                                >
+                                    <ArrowUpIcon
+                                        className={cn(
+                                            "w-5 h-5 cursor-pointer",
+                                            value.trim()
+                                                ? "text-muted"
+                                                : "text-foreground/20"
+                                        )}
+                                    />
+                                    <span className="sr-only">Send</span>
+                                </button></a>
                         </div>
                     </div>
                 </div>

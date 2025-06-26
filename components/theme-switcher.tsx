@@ -26,7 +26,7 @@ export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex items-center gap-1 rounded-full border border-muted bg-background p-1">
+    <div className="flex items-center gap-1 rounded-full border border-border bg-card p-2">
       {options.map((option) => {
         const Icon = option.icon;
         const active = theme === option.value || (theme === undefined && option.value === "system");
@@ -36,7 +36,6 @@ export function ThemeSwitcher() {
             aria-label={option.label}
             className={cn(
               "flex items-center hover:cursor-pointer justify-center w-8 h-4 rounded-full transition-colors",
-              active ? "bg-muted text-primary" : "hover:bg-muted/50 text-muted-foreground"
             )}
             onClick={() => setTheme(option.value)}
             type="button"

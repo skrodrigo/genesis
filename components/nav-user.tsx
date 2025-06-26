@@ -51,17 +51,17 @@ export function NavUser({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="default"
-              className="data-[state=open]:bg-sidebar-accent p-0 m-0 data-[state=open]:text-sidebar-accent-foreground flex justify-center items-center max-w-[200px] h-10"
+              className="data-[state=open]:bg-sidebar-accent cursor-pointer p-0 m-0 data-[state=open]:text-sidebar-accent-foreground flex justify-center items-center max-w-[200px] h-10"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-8 w-8 rounded-xl">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-xl">CN</AvatarFallback>
               </Avatar>
               <div className="grid text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
               </div>
               <div>
-                <Badge className="bg-foreground flex items-center justify-center">
+                <Badge className="bg-muted border border-border flex items-center justify-center text-foreground" >
                   Free
                 </Badge>
               </div>
@@ -69,7 +69,7 @@ export function NavUser({
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg mt-3"
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-xl mt-3"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
@@ -78,9 +78,9 @@ export function NavUser({
               <DropdownMenuItem>
                 <div className="flex items-center justify-between w-full">
                   <div className="flex justify-center items-center">
-                    <Avatar className="h-8 w-8 rounded-lg">
+                    <Avatar className="h-8 w-8 rounded-xl">
                       <AvatarImage src={user.avatar} alt={user.name} />
-                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                      <AvatarFallback className="rounded-xl">CN</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col ml-2 leading-tight">
                       <span className="font-semibold">Personal</span>
@@ -97,9 +97,9 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <div className="flex justify-center items-center">
-                  <Avatar className="h-8 w-8 rounded-lg">
+                  <Avatar className="h-8 w-8 rounded-xl">
                     <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    <AvatarFallback className="rounded-xl">CN</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col ml-2 leading-tight">
                     <span className="font-semibold">Jonh Doe project´s</span>

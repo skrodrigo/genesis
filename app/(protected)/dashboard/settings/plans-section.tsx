@@ -84,7 +84,7 @@ export function PlansSection() {
             <Card
               key={plan.title}
               className={
-                `rounded-lg border border-border bg-muted flex flex-col px-0 py-0` +
+                `rounded-xl border border-border bg-card flex flex-col px-0 py-0` +
                 (idx === 1 ? " border border-border" : "")
               }
             >
@@ -93,7 +93,7 @@ export function PlansSection() {
                   <CardTitle className="text-foreground text-2xl">{plan.title}</CardTitle>
                   {plan.badge && (
                     <Badge
-                      className="text-foreground bg-transparent rounded-lg px-2 py-0.5 text-xs ml-2 border border-border"
+                      className="text-foreground bg-transparent rounded-xl px-2 py-0.5 text-xs ml-2 border border-border"
                     >
                       {plan.badge}
                     </Badge>
@@ -167,7 +167,7 @@ export function PlansSection() {
               <CardFooter className="px-6 pb-6 pt-0">
                 <Button
                   variant="default"
-                  className='w-full mt-2 bg-foreground cursor-pointer text-secondary border-none shadow-none text-base py-2'
+                  className='w-full mt-2 bg-primary cursor-pointer text-primary-foreground border-none text-base py-2'
                 >
                   {plan.button}
                 </Button>
