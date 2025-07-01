@@ -115,7 +115,7 @@ export function ChatInput() {
         <div className="flex flex-col items-center w-full justify-center max-w-4xl mx-auto space-y-4">
 
             <div className="w-full">
-                <div className="relative bg-card rounded-xl border border-border">
+                <div className="relative bg-muted border border-border rounded-lg">
                     {files.length > 0 && (
                         <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background overflow-x-auto">
                             {files.map((file, idx) => (
@@ -132,7 +132,7 @@ export function ChatInput() {
                                             className="rounded-sm object-cover w-8 h-8"
                                         />
                                     ) : (
-                                        <div className="w-8 h-8 flex items-center justify-center rounded-xl bg-muted text-muted-foreground">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-muted text-muted-foreground">
                                             <Paperclip className="w-4 h-4" />
                                         </div>
                                     )}
@@ -189,7 +189,7 @@ export function ChatInput() {
                             />
                             <button
                                 type="button"
-                                className="group p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900 rounded-xl transition-colors flex items-center gap-1"
+                                className="group p-2 hover:bg-zinc-200 dark:hover:bg-zinc-900 rounded-lg transition-colors flex items-center gap-1"
                                 onClick={() => fileInputRef.current?.click()}
                             >
                                 <Paperclip className="w-4 h-4 text-foreground" />
@@ -202,7 +202,7 @@ export function ChatInput() {
                             <a href="/dashboard/chat" >
                                 <button
                                     className={cn(
-                                        "px-1.5 py-1.5 rounded-xl text-sm transition-colors border border-border flex items-center justify-between gap-1",
+                                        "px-1.5 py-1.5 rounded-lg text-sm transition-colors border border-border flex items-center justify-between gap-1",
                                         value.trim()
                                             ? "bg-foreground text-secondary"
                                             : "text-muted"

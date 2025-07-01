@@ -43,18 +43,6 @@ const plans = [
     button: "Selecionar",
     type: "pro"
   },
-  {
-    title: "Teams",
-    description: "Para colaborar com outros",
-    price: "R$30 /mês",
-    credits: creditOptions.map(opt => opt.label),
-    features: [
-      "Centralizamento de faturamento",
-      "Centralizamento e gerenciamento de acesso",
-    ],
-    button: "Selecionar",
-    type: "teams"
-  }
 ];
 
 export function PlansSection() {
@@ -66,7 +54,7 @@ export function PlansSection() {
           Escolha o plano ideal para o seu uso.
         </DialogDescription>
       </DialogHeader>
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
         {plans.map((plan, idx) => {
           const [selectedCredit, setSelectedCredit] = useState(plan.credits[0]);
 
@@ -77,14 +65,14 @@ export function PlansSection() {
           }
           if (plan.type === "teams") {
             const opt = creditOptions.find(opt => opt.label === selectedCredit);
-            if (opt) displayPrice = `R$${Math.round(opt.price * 1.5)} /mês`;
+            if (opt) displayPrice = `R$${Math.round(opt.price * 1.8)} /mês`;
           }
 
           return (
             <Card
               key={plan.title}
               className={
-                `rounded-xl border border-border bg-card flex flex-col px-0 py-0` +
+                `rounded-lg border border-border bg-card flex flex-col px-0 py-0` +
                 (idx === 1 ? " border border-border" : "")
               }
             >
@@ -93,7 +81,7 @@ export function PlansSection() {
                   <CardTitle className="text-foreground text-2xl">{plan.title}</CardTitle>
                   {plan.badge && (
                     <Badge
-                      className="text-foreground bg-transparent rounded-xl px-2 py-0.5 text-xs ml-2 border border-border"
+                      className="text-foreground bg-transparent rounded-lg px-2 py-0.5 text-xs ml-2 border border-border"
                     >
                       {plan.badge}
                     </Badge>

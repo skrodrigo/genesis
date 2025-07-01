@@ -27,7 +27,7 @@ export function SettingsDialog({ open, onOpenChange }: { open: boolean, onOpenCh
             {tabs.map(tab => (
               <button
                 key={tab.label}
-                className={`flex items-center gap-2 px-2 py-1.5 rounded-xl text-sm cursor-pointer transition-colors ${activeTab === tab.label ? 'bg-accent text-accent-foreground' : ''}`}
+                className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm cursor-pointer transition-colors ${activeTab === tab.label ? 'bg-accent text-accent-foreground' : ''}`}
                 onClick={() => setActiveTab(tab.label)}
               >
                 {tab.icon}

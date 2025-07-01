@@ -37,18 +37,18 @@ export function LoginForm({
           <form>
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
-                <Button variant="default" className="w-full">
+                <Button variant="outline" className="w-full">
                   {isMounted && (
                     <Image
                       alt="Logo"
                       width={20}
                       height={20}
-                      src={resolvedTheme === "dark" ? "/github.svg" : "/github-white.svg"}
+                      src={resolvedTheme === "dark" ? "/github-white.svg" : "/github.svg"}
                     />
                   )}
                   Login with Github
                 </Button>
-                <Button variant="default" className="w-full">
+                <Button variant="outline" className="w-full">
                   <Image alt="Google" width={18} height={18} src='/google.svg' />
                   Login with Google
                 </Button>
@@ -73,7 +73,7 @@ export function LoginForm({
                     <Label htmlFor="password">Password</Label>
                     <a
                       href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline"
+                      className="ml-auto text-sm underline-offset-4 hover:underline text-accent-foreground/60"
                     >
                       Forgot your password?
                     </a>
@@ -94,10 +94,6 @@ export function LoginForm({
           </form>
         </CardContent>
       </Card>
-      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
-      </div>
     </div>
   )
 }

@@ -30,44 +30,102 @@ interface Item {
 const initialItems: Record<string, Item> = {
   app: {
     name: "app",
-    children: ["app/layout.tsx", "app/page.tsx", "app/(dashboard)", "app/api"],
+    children: [
+      "app/layout.tsx", "app/page.tsx", "app/(dashboard)", "app/(auth)", "app/(settings)", "app/api", "app/utils", "app/hooks", "app/assets"
+    ],
   },
   "app/layout.tsx": { name: "layout.tsx", fileExtension: "tsx" },
   "app/page.tsx": { name: "page.tsx", fileExtension: "tsx" },
   "app/(dashboard)": {
     name: "(dashboard)",
-    children: ["app/(dashboard)/dashboard"],
+    children: ["app/(dashboard)/dashboard", "app/(dashboard)/reports", "app/(dashboard)/users"],
   },
   "app/(dashboard)/dashboard": {
     name: "dashboard",
-    children: ["app/(dashboard)/dashboard/page.tsx"],
+    children: ["app/(dashboard)/dashboard/page.tsx", "app/(dashboard)/dashboard/analytics.tsx", "app/(dashboard)/dashboard/overview.tsx"],
   },
-  "app/(dashboard)/dashboard/page.tsx": {
-    name: "page.tsx",
-    fileExtension: "tsx",
+  "app/(dashboard)/dashboard/page.tsx": { name: "page.tsx", fileExtension: "tsx" },
+  "app/(dashboard)/dashboard/analytics.tsx": { name: "analytics.tsx", fileExtension: "tsx" },
+  "app/(dashboard)/dashboard/overview.tsx": { name: "overview.tsx", fileExtension: "tsx" },
+  "app/(dashboard)/reports": {
+    name: "reports",
+    children: ["app/(dashboard)/reports/monthly.tsx", "app/(dashboard)/reports/annual.tsx"],
   },
-  "app/api": { name: "api", children: ["app/api/hello"] },
+  "app/(dashboard)/reports/monthly.tsx": { name: "monthly.tsx", fileExtension: "tsx" },
+  "app/(dashboard)/reports/annual.tsx": { name: "annual.tsx", fileExtension: "tsx" },
+  "app/(dashboard)/users": {
+    name: "users",
+    children: ["app/(dashboard)/users/list.tsx", "app/(dashboard)/users/profile.tsx"],
+  },
+  "app/(dashboard)/users/list.tsx": { name: "list.tsx", fileExtension: "tsx" },
+  "app/(dashboard)/users/profile.tsx": { name: "profile.tsx", fileExtension: "tsx" },
+  "app/(auth)": {
+    name: "(auth)",
+    children: ["app/(auth)/login.tsx", "app/(auth)/register.tsx", "app/(auth)/forgot-password.tsx"],
+  },
+  "app/(auth)/login.tsx": { name: "login.tsx", fileExtension: "tsx" },
+  "app/(auth)/register.tsx": { name: "register.tsx", fileExtension: "tsx" },
+  "app/(auth)/forgot-password.tsx": { name: "forgot-password.tsx", fileExtension: "tsx" },
+  "app/(settings)": {
+    name: "(settings)",
+    children: ["app/(settings)/profile.tsx", "app/(settings)/preferences.tsx", "app/(settings)/security.tsx"],
+  },
+  "app/(settings)/profile.tsx": { name: "profile.tsx", fileExtension: "tsx" },
+  "app/(settings)/preferences.tsx": { name: "preferences.tsx", fileExtension: "tsx" },
+  "app/(settings)/security.tsx": { name: "security.tsx", fileExtension: "tsx" },
+  "app/api": { name: "api", children: ["app/api/hello", "app/api/user", "app/api/report"] },
   "app/api/hello": { name: "hello", children: ["app/api/hello/route.ts"] },
   "app/api/hello/route.ts": { name: "route.ts", fileExtension: "ts" },
+  "app/api/user": { name: "user", children: ["app/api/user/route.ts"] },
+  "app/api/user/route.ts": { name: "route.ts", fileExtension: "ts" },
+  "app/api/report": { name: "report", children: ["app/api/report/route.ts"] },
+  "app/api/report/route.ts": { name: "route.ts", fileExtension: "ts" },
+  "app/utils": { name: "utils", children: ["app/utils/format.ts", "app/utils/validate.ts"] },
+  "app/utils/format.ts": { name: "format.ts", fileExtension: "ts" },
+  "app/utils/validate.ts": { name: "validate.ts", fileExtension: "ts" },
+  "app/hooks": { name: "hooks", children: ["app/hooks/useAuth.ts", "app/hooks/useTheme.ts"] },
+  "app/hooks/useAuth.ts": { name: "useAuth.ts", fileExtension: "ts" },
+  "app/hooks/useTheme.ts": { name: "useTheme.ts", fileExtension: "ts" },
+  "app/assets": { name: "assets", children: ["app/assets/logo.svg", "app/assets/bg.png"] },
+  "app/assets/logo.svg": { name: "logo.svg", fileExtension: "svg" },
+  "app/assets/bg.png": { name: "bg.png", fileExtension: "png" },
   components: {
     name: "components",
-    children: ["components/button.tsx", "components/card.tsx"],
+    children: [
+      "components/button.tsx", "components/card.tsx", "components/sidebar.tsx", "components/navbar.tsx", "components/dialog.tsx", "components/avatar.tsx", "components/command.tsx", "components/tree.tsx"
+    ],
   },
   "components/button.tsx": { name: "button.tsx", fileExtension: "tsx" },
   "components/card.tsx": { name: "card.tsx", fileExtension: "tsx" },
-  lib: { name: "lib", children: ["lib/utils.ts"] },
+  "components/sidebar.tsx": { name: "sidebar.tsx", fileExtension: "tsx" },
+  "components/navbar.tsx": { name: "navbar.tsx", fileExtension: "tsx" },
+  "components/dialog.tsx": { name: "dialog.tsx", fileExtension: "tsx" },
+  "components/avatar.tsx": { name: "avatar.tsx", fileExtension: "tsx" },
+  "components/command.tsx": { name: "command.tsx", fileExtension: "tsx" },
+  "components/tree.tsx": { name: "tree.tsx", fileExtension: "tsx" },
+  lib: {
+    name: "lib",
+    children: ["lib/utils.ts", "lib/constants.ts", "lib/api.ts", "lib/auth.ts"]
+  },
   "lib/utils.ts": { name: "utils.ts", fileExtension: "ts" },
+  "lib/constants.ts": { name: "constants.ts", fileExtension: "ts" },
+  "lib/api.ts": { name: "api.ts", fileExtension: "ts" },
+  "lib/auth.ts": { name: "auth.ts", fileExtension: "ts" },
   public: {
     name: "public",
-    children: ["public/favicon.ico", "public/vercel.svg"],
+    children: ["public/favicon.ico", "public/vercel.svg", "public/robots.txt", "public/logo192.png", "public/logo512.png"]
   },
   "public/favicon.ico": { name: "favicon.ico", fileExtension: "ico" },
   "public/vercel.svg": { name: "vercel.svg", fileExtension: "svg" },
+  "public/robots.txt": { name: "robots.txt", fileExtension: "txt" },
+  "public/logo192.png": { name: "logo192.png", fileExtension: "png" },
+  "public/logo512.png": { name: "logo512.png", fileExtension: "png" },
   "package.json": { name: "package.json", fileExtension: "json" },
   "tailwind.config.ts": { name: "tailwind.config.ts", fileExtension: "ts" },
   "tsconfig.json": { name: "tsconfig.json", fileExtension: "json" },
   "next.config.mjs": { name: "next.config.mjs", fileExtension: "mjs" },
   "README.md": { name: "README.md", fileExtension: "md" },
+
   root: {
     name: "Project Root",
     children: [
@@ -84,7 +142,6 @@ const initialItems: Record<string, Item> = {
   },
 }
 
-// Helper function to get icon based on file extension
 function getFileIcon(extension: string | undefined, className: string) {
   switch (extension) {
     case "tsx":
@@ -125,19 +182,16 @@ export default function Component() {
     canReorder: false,
     onDrop: createOnDropHandler((parentItem, newChildrenIds) => {
       setItems((prevItems) => {
-        // Sort the children alphabetically
         const sortedChildren = [...newChildrenIds].sort((a, b) => {
           const itemA = prevItems[a]
           const itemB = prevItems[b]
 
-          // First sort folders before files
           const isAFolder = (itemA?.children?.length ?? 0) > 0
           const isBFolder = (itemB?.children?.length ?? 0) > 0
 
           if (isAFolder && !isBFolder) return -1
           if (!isAFolder && isBFolder) return 1
 
-          // Then sort alphabetically by name
           return (itemA?.name ?? "").localeCompare(itemB?.name ?? "")
         })
 
@@ -191,21 +245,6 @@ export default function Component() {
         </Tree>
       </div>
 
-      <p
-        aria-live="polite"
-        role="region"
-        className="text-muted-foreground mt-2 text-xs"
-      >
-        File editor with drag and drop ∙{" "}
-        <a
-          href="https://headless-tree.lukasbach.com"
-          className="hover:text-foreground underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          API
-        </a>
-      </p>
     </div>
   )
 }
