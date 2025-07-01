@@ -30,11 +30,10 @@ export function TestimonialsSection() {
       <div className="grid gap-8 md:grid-cols-3">
         {TESTIMONIALS.map((t) => (
           <Card key={t.name} className="h-full">
-            <CardContent className="space-y-4 pt-6">
-              <p className="italic">“{t.quote}”</p>
-              <Separator />
+            <CardContent className="space-y-4">
+              <p>“{t.quote}”</p>
               <p className="text-sm font-medium">
-                {t.name} • {t.company}
+                {t.name}  {t.company}
               </p>
             </CardContent>
           </Card>
