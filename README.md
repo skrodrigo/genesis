@@ -13,9 +13,21 @@ Este projeto foi criado para acelerar o processo de desenvolvimento de front-end
 - Next.js
 - Tailwind CSS
 - Shadcn UI
+- Better Auth
 - Prisma
 - PostgreSQL
+- NeonDB
 - Vercel AI SDK
 - AI
+- Resend
+- React Hook Form
+- Vitest
+- Zod
+- Zustand
+- TanStack Query
+- Husky
+- Ultracite
+- C15T
+- Stripe
 
 Em desenvolvimento...
