@@ -18,7 +18,6 @@ Este projeto foi criado para acelerar o processo de desenvolvimento de front-end
 - PostgreSQL
 - NeonDB
 - Vercel AI SDK
-- AI
 - Resend
 - React Hook Form
 - Vitest
