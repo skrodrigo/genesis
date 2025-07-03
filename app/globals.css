@@ -36,10 +36,10 @@
   --sidebar-accent-foreground: oklch(0.2099 0.0039 286.0588);
   --sidebar-border: oklch(0.2809 0 0);
   --sidebar-ring: oklch(0.2099 0.0039 286.0588);
-  --font-sans: Inter, sans-serif;
-  --font-serif: Georgia, serif;
+  --font-sans: Geist, sans-serif;
+  --font-serif: Inter, sans-serif;
   --font-mono: JetBrains Mono, monospace;
-  --radius: 1.5rem;
+  --radius: 0.5rem;
   --shadow-2xs: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00);
   --shadow-xs: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00);
   --shadow-sm: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00), 0px 1px 2px -1px hsl(0 0% 10.1961% / 0.00);
@@ -48,6 +48,8 @@
   --shadow-lg: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00), 0px 4px 6px -1px hsl(0 0% 10.1961% / 0.00);
   --shadow-xl: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00), 0px 8px 10px -1px hsl(0 0% 10.1961% / 0.00);
   --shadow-2xl: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
 }
 
 .dark {
@@ -83,10 +85,10 @@
   --sidebar-accent-foreground: oklch(1.0000 0 0);
   --sidebar-border: oklch(0.2809 0 0);
   --sidebar-ring: oklch(1.0000 0 0);
-  --font-sans: Inter, sans-serif;
-  --font-serif: Georgia, serif;
+  --font-sans: Geist, sans-serif;
+  --font-serif: Inter, sans-serif;
   --font-mono: JetBrains Mono, monospace;
-  --radius: 1.5rem;
+  --radius: 0.5rem;
   --shadow-2xs: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00);
   --shadow-xs: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00);
   --shadow-sm: 0px 1px 0px 0px hsl(0 0% 10.1961% / 0.00), 0px 1px 2px -1px hsl(0 0% 10.1961% / 0.00);
