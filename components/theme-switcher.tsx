@@ -1,7 +1,7 @@
 "use client";
 
+import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Monitor, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const options = [
@@ -29,18 +29,20 @@ export function ThemeSwitcher() {
     <div className="flex items-center gap-1 rounded-full border border-border bg-card p-2">
       {options.map((option) => {
         const Icon = option.icon;
-        const active = theme === option.value || (theme === undefined && option.value === "system");
+        const active =
+          theme === option.value ||
+          (theme === undefined && option.value === "system");
         return (
           <button
-            key={option.value}
             aria-label={option.label}
             className={cn(
-              "flex items-center hover:cursor-pointer justify-center w-8 h-4 rounded-full transition-colors",
+              "flex h-4 w-8 items-center justify-center rounded-full transition-colors hover:cursor-pointer"
             )}
+            key={option.value}
             onClick={() => setTheme(option.value)}
             type="button"
           >
-            <Icon className="w-5 h-5" />
+            <Icon className="h-5 w-5" />
           </button>
         );
       })}
