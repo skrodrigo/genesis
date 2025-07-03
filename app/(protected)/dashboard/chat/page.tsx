@@ -12,9 +12,12 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable"
+import { useState, useEffect } from "react"
 
 export default function Page() {
-  const { resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => { setIsMounted(true); }, []);
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden bg-background">
@@ -44,13 +47,15 @@ export default function Page() {
                 <Image src="/supabase.svg" alt="Supabase" width={16} height={16} />
               </button>
               <button className="rounded-md p-1.5 bg-card border border-border">
-                <Image
-                  alt="Github"
-                  width={16}
-                  height={16}
-                  src={resolvedTheme === "light" ? "/github.svg" : "/github-white.svg"}
-                  className="h-4 w-4"
-                />
+                {isMounted && (
+                  <Image
+                    alt="Github"
+                    width={16}
+                    height={16}
+                    src={resolvedTheme === "light" ? "/github.svg" : "/github-white.svg"}
+                    className="h-4 w-4"
+                  />
+                )}
               </button>
               <button className="rounded-md p-1.5 bg-card border border-border">
                 <Share className="h-4 w-4" />

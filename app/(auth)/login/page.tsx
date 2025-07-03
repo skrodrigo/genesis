@@ -2,12 +2,10 @@
 
 import { LoginForm } from "@/components/login-form"
 import Image from "next/image"
-import { useTheme } from "next-themes"
 
 import { useEffect, useState } from "react";
 
 export default function LoginPage() {
-  const { resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
