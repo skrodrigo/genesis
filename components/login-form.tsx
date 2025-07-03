@@ -1,24 +1,25 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Link from "next/link";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import Image from "next/image"
-import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     setIsMounted(true);
@@ -37,24 +38,39 @@ export function LoginForm({
           <form>
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
-                <Button variant="outline" className="w-full">
+                <Button
+                  className="w-full bg-foreground/90 text-background dark:text-background"
+                  variant="default"
+                >
                   {isMounted && (
                     <Image
                       alt="Logo"
-                      width={20}
                       height={20}
-                      src={resolvedTheme === "dark" ? "/github-white.svg" : "/github.svg"}
+                      src={
+                        resolvedTheme === "light"
+                          ? "/github-white.svg"
+                          : "/github.svg"
+                      }
+                      width={20}
                     />
                   )}
                   Login with Github
                 </Button>
-                <Button variant="outline" className="w-full">
-                  <Image alt="Google" width={18} height={18} src='/google.svg' />
+                <Button
+                  className="w-full bg-foreground/90 text-background dark:text-background"
+                  variant="default"
+                >
+                  <Image
+                    alt="Google"
+                    height={18}
+                    src="/google.svg"
+                    width={18}
+                  />
                   Login with Google
                 </Button>
               </div>
-              <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-card text-muted-foreground relative z-10 px-2">
+              <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
+                <span className="relative z-10 bg-card px-2 text-muted-foreground">
                   Or continue with
                 </span>
               </div>
@@ -63,37 +79,45 @@ export function LoginForm({
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
-                    type="email"
                     placeholder="m@example.com"
                     required
+                    type="email"
                   />
                 </div>
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <a
+                    <Link
+                      className="ml-auto text-accent-foreground/60 text-sm underline-offset-4 hover:underline"
                       href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline text-accent-foreground/60"
                     >
                       Forgot your password?
-                    </a>
+                    </Link>
                   </div>
-                  <Input id="password" type="password" placeholder="••••••••" required />
+                  <Input
+                    id="password"
+                    placeholder="••••••••"
+                    required
+                    type="password"
+                  />
                 </div>
-                <Button type="submit" className="w-full">
+                <Button className="w-full" type="submit">
                   Login
                 </Button>
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="/dashboard" className="underline underline-offset-4">
+                <Link
+                  className="underline underline-offset-4"
+                  href="/dashboard"
+                >
                   Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </form>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

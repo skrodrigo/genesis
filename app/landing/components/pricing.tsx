@@ -47,7 +47,7 @@ export function PricingSection() {
           return (
             <Card
               key={plan.tier}
-              className={`${isHighlighted ? "border-primary" : ""} flex flex-col h-full`}
+              className={`${isHighlighted ? "bg-foreground backdrop-blur-2xl text-muted" : ""} flex flex-col h-full`}
             >
               <CardHeader className="items-start">
                 <CardTitle>{plan.tier}</CardTitle>
