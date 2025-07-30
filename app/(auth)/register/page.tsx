@@ -1,10 +1,10 @@
-import { LoginForm } from "@/components/forms/login-form";
+import { RegisterForm } from "@/components/forms/register-form";
 
-export default function LoginPage() {
+export default function RegisterPage() {
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-background">
 			<div className="w-full max-w-sm">
-				<LoginForm />
+				<RegisterForm />
 			</div>
 		</div>
 	);
