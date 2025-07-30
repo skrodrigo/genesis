@@ -26,7 +26,7 @@ Este projeto foi criado para acelerar o processo de desenvolvimento de front-end
 - TanStack Query
 - Husky
 - Ultracite
-- C15T
 - Stripe
+- Biome
 
 Em desenvolvimento...
