@@ -72,7 +72,7 @@ export function RegisterForm() {
 	const signInWithGoogle = async () => {
 		await authClient.signIn.social({
 			provider: "google",
-			callbackURL: "/dashboard/apps",
+			callbackURL: "/dashboard",
 		});
 	};
 

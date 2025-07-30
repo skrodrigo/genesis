@@ -131,7 +131,7 @@ export const signIn = async (
 			values: {
 				text: "Login realizado com sucesso.",
 			},
-			redirect: "/dashboard/apps",
+			redirect: "/dashboard",
 		};
 	} catch (e: unknown) {
 		const error = e as Error;
@@ -187,7 +187,7 @@ export const signUp = async (
 			values: {
 				text: "Usuário criado com sucesso.",
 			},
-			redirect: "/dashboard/apps",
+			redirect: "/dashboard",
 		};
 	} catch (e) {
 		const error = e as Error;
@@ -263,7 +263,7 @@ export const updateProfile = async (data: z.infer<typeof userSchema>) => {
 		return {
 			success: true,
 			message: "Perfil atualizado com sucesso.",
-			redirect: "/dashboard/apps",
+			redirect: "/dashboard",
 		};
 	} catch (_error) {
 		return {
