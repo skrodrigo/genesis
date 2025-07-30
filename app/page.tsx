@@ -1,15 +1,14 @@
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { auth } from "../lib/auth";
+"use client";
 
-export default async function Home() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-  if (!session) {
-    redirect("/landing");
-  }
+export default function Home() {
+	const router = useRouter();
 
-  return;
+	useEffect(() => {
+		router.push("/landing");
+	}, [router]);
+
+	return null;
 }

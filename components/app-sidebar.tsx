@@ -47,7 +47,7 @@ const data = {
 		{
 			name: "Componente de gravação de voz novo",
 			url: "#",
-			icon: Map,
+			icon: MapIcon,
 		},
 	],
 };
