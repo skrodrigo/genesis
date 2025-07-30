@@ -5,47 +5,44 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 const options = [
-  {
-    label: "System",
-    value: "system",
-    icon: Monitor,
-  },
-  {
-    label: "Light",
-    value: "light",
-    icon: Sun,
-  },
-  {
-    label: "Dark",
-    value: "dark",
-    icon: Moon,
-  },
+	{
+		label: "System",
+		value: "system",
+		icon: Monitor,
+	},
+	{
+		label: "Light",
+		value: "light",
+		icon: Sun,
+	},
+	{
+		label: "Dark",
+		value: "dark",
+		icon: Moon,
+	},
 ];
 
 export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+	const { setTheme } = useTheme();
 
-  return (
-    <div className="flex items-center gap-1 rounded-full border border-border bg-card p-2">
-      {options.map((option) => {
-        const Icon = option.icon;
-        const active =
-          theme === option.value ||
-          (theme === undefined && option.value === "system");
-        return (
-          <button
-            aria-label={option.label}
-            className={cn(
-              "flex h-4 w-8 items-center justify-center rounded-full transition-colors hover:cursor-pointer"
-            )}
-            key={option.value}
-            onClick={() => setTheme(option.value)}
-            type="button"
-          >
-            <Icon className="h-5 w-5" />
-          </button>
-        );
-      })}
-    </div>
-  );
+	return (
+		<div className="flex items-center gap-1 rounded-full border border-border bg-card p-2">
+			{options.map((option) => {
+				const Icon = option.icon;
+				return (
+					<button
+						aria-label={option.label}
+						className={cn(
+							"flex h-4 w-8 items-center justify-center rounded-full transition-colors hover:cursor-pointer"
+						)}
+						key={option.value}
+						onClick={() => setTheme(option.value)}
+						type="button"
+					>
+						<Icon className="h-5 w-5" />
+					</button>
+				);
+			})}
+		</div>
+	);
 }

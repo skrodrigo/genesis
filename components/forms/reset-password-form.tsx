@@ -4,143 +4,148 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
 } from "@/components/ui/card";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { cn } from "@/lib/utils";
 
-const formSchema = z.object({
-  password: z.string().min(8),
-  confirmPassword: z.string().min(8),
-});
+const formSchema = z
+	.object({
+		password: z.string().min(8, "A senha deve ter no mínimo 8 caracteres."),
+		confirmPassword: z.string(),
+	})
+	.refine((data) => data.password === data.confirmPassword, {
+		message: "As senhas não coincidem.",
+		path: ["confirmPassword"],
+	});
 
-export function ResetPasswordForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
+export function ResetPasswordForm() {
+	const searchParams = useSearchParams();
+	const router = useRouter();
 
-  const token = searchParams.get("token") as string;
+	const token = searchParams.get("token") as string;
 
-  const [isLoading, setIsLoading] = useState(false);
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			password: "",
+			confirmPassword: "",
+		},
+	});
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      password: "",
-      confirmPassword: "",
-    },
-  });
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		const { error } = await authClient.resetPassword({
+			newPassword: values.password,
+			token,
+		});
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
+		if (error) {
+			toast.error(error.message);
+		} else {
+			toast.success("Senha redefinida com sucesso!");
+			router.push("/login");
+		}
+	};
 
-    if (values.password !== values.confirmPassword) {
-      toast.error("Passwords do not match");
-      setIsLoading(false);
-      return;
-    }
+	return (
+		<div className="flex min-h-screen items-center justify-center bg-background p-4">
+			<Card className="w-full max-w-md bg-card">
+				<CardHeader className="text-center">
+					<CardTitle className="text-2xl text-foreground">
+						Redefinir sua senha
+					</CardTitle>
+					<CardDescription className="text-muted-foreground">
+						Crie uma nova senha para sua conta.
+					</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<Form {...form}>
+						<form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+							<FormField
+								control={form.control}
+								name="password"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel className="text-foreground">
+											Nova Senha
+										</FormLabel>
+										<FormControl>
+											<Input
+												placeholder="Sua nova senha"
+												type="password"
+												{...field}
+												className="border-border bg-background placeholder:text-muted-foreground/60 focus:border-primary"
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
 
-    const { error } = await authClient.resetPassword({
-      newPassword: values.password,
-      token,
-    });
+							<FormField
+								control={form.control}
+								name="confirmPassword"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel className="text-foreground">
+											Confirmar Nova Senha
+										</FormLabel>
+										<FormControl>
+											<Input
+												placeholder="Confirme sua nova senha"
+												type="password"
+												{...field}
+												className="border-border bg-background placeholder:text-muted-foreground/60 focus:border-primary"
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
 
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Password reset successfully");
-      router.push("/login");
-    }
+							<Button
+								className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+								disabled={form.formState.isSubmitting}
+								type="submit"
+							>
+								{form.formState.isSubmitting ? (
+									<>
+										<Loader2 className="mr-2 size-4 animate-spin" />
+										Redefinindo...
+									</>
+								) : (
+									"Redefinir Senha"
+								)}
+							</Button>
+						</form>
+					</Form>
 
-    setIsLoading(false);
-  }
-
-  return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Reset Password</CardTitle>
-          <CardDescription>Enter your new password</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid gap-6">
-                <div className="grid gap-3">
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="password" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid gap-3">
-                  <FormField
-                    control={form.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Confirm Password</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="password" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? (
-                    <Loader2 className="size-4 animate-spin" />
-                  ) : (
-                    "Reset Password"
-                  )}
-                </Button>
-              </div>
-              <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link href="/signup" className="underline underline-offset-4">
-                  Sign up
-                </Link>
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our{" "}
-        <Link href="#">Terms of Service</Link> and{" "}
-        <Link href="#">Privacy Policy</Link>.
-      </div>
-    </div>
-  );
+					<div className="mt-4 text-center text-sm">
+						Voltar para o{" "}
+						<Link className="text-primary underline" href="/login">
+							Login
+						</Link>
+					</div>
+				</CardContent>
+			</Card>
+		</div>
+	);
 }
