@@ -1,7 +1,6 @@
 "use client";
 
 import {
-	FolderOpenIcon,
 	Frame,
 	Map as MapIcon,
 	PieChart,
@@ -89,16 +88,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				>
 					<SearchIcon />
 					Pesquisa
-				</Button>
-				<Button
-					asChild
-					className="flex items-center justify-start gap-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-					variant="ghost"
-				>
-					<Link href="/dashboard/projects">
-						<FolderOpenIcon />
-						Projetos
-					</Link>
 				</Button>
 				<Button
 					asChild
